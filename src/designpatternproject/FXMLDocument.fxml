@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="winAnchorPane" prefHeight="485.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="designpatternproject.FXMLDocumentController">
+   <children>
+      <JFXTabPane fx:id="winTabPane" prefHeight="444.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab text="Student List">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <JFXTreeTableView fx:id="studentTableView" layoutY="-1.0" prefHeight="454.0" prefWidth="700.0">
+                           <columns>
+                              <TreeTableColumn fx:id="idColumn" prefWidth="75.0" text="Id" />
+                              <TreeTableColumn fx:id="nameColumn" prefWidth="170.0" style="-fx-padding: 10;" text="Name" />
+                              <TreeTableColumn fx:id="departmentColumn" prefWidth="179.0" text="Department" />
+                              <TreeTableColumn fx:id="endColumn" prefWidth="102.0" text="End" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </JFXTreeTableView>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Add Student">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="430.0" prefWidth="700.0">
+                     <children>
+                        <VBox layoutX="36.0" layoutY="36.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="362.0" prefWidth="313.0" style="-fx-background-color: #ffffff;">
+                           <children>
+                              <Label text="Student Form">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets left="5.0" />
+                                 </padding>
+                              </Label>
+                              <JFXTextField fx:id="idTextField" prefHeight="35.0" prefWidth="274.0" promptText="ID">
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </JFXTextField>
+                              <JFXTextField fx:id="nameTextField" prefHeight="35.0" promptText="Name">
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </JFXTextField>
+                              <JFXPasswordField fx:id="passwordTextField" prefHeight="35.0" promptText="Password">
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </JFXPasswordField>
+                              <JFXComboBox fx:id="departmentComboBox" prefHeight="35.0" promptText="Select Department">
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </JFXComboBox>
+                              <HBox prefHeight="33.0" prefWidth="274.0">
+                                 <children>
+                                    <JFXDatePicker fx:id="fromDatePicker" prefHeight="35.0" promptText="From" />
+                                    <JFXDatePicker fx:id="toDatePicker" prefHeight="35.0" promptText="To" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <JFXButton fx:id="addButton" prefHeight="32.0" prefWidth="304.0" style="-fx-background-color: #3ad;" text="Add" textFill="WHITE">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </JFXButton>
+                              <JFXButton fx:id="hitB" text="Hit Me" />
+                           </children>
+                           <padding>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </padding>
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Student">
+              <content>
+                <AnchorPane maxHeight="1.7976931348623157E308" minWidth="0.0" prefHeight="451.0" prefWidth="700.0">
+                     <children>
+                        <VBox prefHeight="414.0" prefWidth="700.0">
+                           <children>
+                              <Label text="Id" />
+                              <Label text="Name" />
+                              <Label text="Password" />
+                              <Label text="Department" />
+                              <Label text="Status" />
+                              <JFXTreeTableView maxWidth="-Infinity" minWidth="-Infinity" prefHeight="247.0" prefWidth="357.0">
+                                 <columns>
+                                    <TreeTableColumn prefWidth="75.0" text="Column X" />
+                                    <TreeTableColumn prefWidth="75.0" text="Column X" />
+                                 </columns>
+                              </JFXTreeTableView>
+                           </children>
+                           <padding>
+                              <Insets left="20.0" top="20.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+   </children>
+</AnchorPane>
