@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXScrollPane?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
@@ -20,23 +21,27 @@
 
 <AnchorPane fx:id="winAnchorPane" prefHeight="485.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="designpatternproject.FXMLDocumentController">
    <children>
-      <JFXTabPane fx:id="winTabPane" prefHeight="444.0" tabClosingPolicy="UNAVAILABLE">
+      <JFXTabPane fx:id="winTabPane" prefHeight="485.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE">
          <tabs>
             <Tab text="Student List">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                <AnchorPane minHeight="-Infinity" minWidth="0.0" prefHeight="0.0" prefWidth="700.0">
                      <children>
-                        <JFXTreeTableView fx:id="studentTableView" layoutY="-1.0" prefHeight="454.0" prefWidth="700.0">
-                           <columns>
-                              <TreeTableColumn fx:id="idColumn" prefWidth="75.0" text="Id" />
-                              <TreeTableColumn fx:id="nameColumn" prefWidth="170.0" style="-fx-padding: 10;" text="Name" />
-                              <TreeTableColumn fx:id="departmentColumn" prefWidth="179.0" text="Department" />
-                              <TreeTableColumn fx:id="endColumn" prefWidth="102.0" text="End" />
-                           </columns>
-                           <columnResizePolicy>
-                              <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </JFXTreeTableView>
+                        <JFXScrollPane>
+                           <children>
+                              <JFXTreeTableView fx:id="studentTableView" prefHeight="454.0" prefWidth="700.0">
+                                 <columns>
+                                    <TreeTableColumn fx:id="idColumn" prefWidth="75.0" text="Id" />
+                                    <TreeTableColumn fx:id="nameColumn" prefWidth="170.0" style="-fx-padding: 10;" text="Name" />
+                                    <TreeTableColumn fx:id="departmentColumn" prefWidth="179.0" text="Department" />
+                                    <TreeTableColumn fx:id="endColumn" prefWidth="102.0" text="End" />
+                                 </columns>
+                                 <columnResizePolicy>
+                                    <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </JFXTreeTableView>
+                           </children>
+                        </JFXScrollPane>
                      </children>
                   </AnchorPane>
               </content>
@@ -92,7 +97,6 @@
                                     <Insets top="10.0" />
                                  </VBox.margin>
                               </JFXButton>
-                              <JFXButton fx:id="hitB" text="Hit Me" />
                            </children>
                            <padding>
                               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

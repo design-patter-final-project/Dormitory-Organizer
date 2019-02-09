@@ -87,17 +87,18 @@ public class FXMLDocumentController implements Initializable {
     private JFXButton addButton;
                     
            
-    ObservableList<Student> person = FXCollections.observableArrayList();
+    ObservableList<Student> student = FXCollections.observableArrayList();
     StudentDaoImpl studentDaoImpl = StudentDaoImpl.getInstance();
-    
+    TreeItem<Student> root;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
         List<Student> students = studentDaoImpl.getAll();
+        System.out.println(students.size());
         
-        students.forEach(student -> {
-            person.add(student);
+        students.forEach(s -> {
+            student.add(s);
         });
         
         idColumn.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Student, String>, ObservableValue<String>>() {
@@ -113,7 +114,6 @@ public class FXMLDocumentController implements Initializable {
                 return param.getValue().getValue().getRowName();
             }
         });
-
 
         departmentColumn.setCellValueFactory(new Callback<TreeTableColumn.CellDataFeatures<Student, String>, ObservableValue<String>>() {
             @Override
@@ -138,7 +138,7 @@ public class FXMLDocumentController implements Initializable {
         
         });
         
-        final TreeItem<Student> root = new RecursiveTreeItem<Student>(person, RecursiveTreeObject::getChildren);
+        root = new RecursiveTreeItem<Student>(student, RecursiveTreeObject::getChildren);
         studentTableView.getColumns().setAll(idColumn, nameColumn, departmentColumn, endColumn);
         studentTableView.setRoot(root);
         studentTableView.setShowRoot(false);
@@ -146,15 +146,9 @@ public class FXMLDocumentController implements Initializable {
         
         studentTableView.getSelectionModel().selectedItemProperty()
             .addListener((obs, oldSelection, newSelection) ->  {
-                
                 System.out.println(newSelection.getValue().getName());
-                winTabPane.getSelectionModel().select(2);
-                
-               
+                winTabPane.getSelectionModel().select(2); 
         });
-        
-        
-        // Add Student 
         
         departmentComboBox.getItems().add("Bio-Medical");
         departmentComboBox.getItems().add("Checmical");
@@ -182,21 +176,37 @@ public class FXMLDocumentController implements Initializable {
         
         student.setDuration(durations);
         
-        System.out.println(student.getId());
-        System.out.println(student.getName());
-        System.out.println(student.getPassword());
-        System.out.println(student.getDepartment());
         int rowAffected = studentDaoImpl.addStudent(student);
-        
+    
         JFXSnackbar bar = new JFXSnackbar(winAnchorPane);
        
         if (rowAffected > 0){ // successful
             Label l = new Label("Successfully added a student");
             bar.enqueue(new SnackbarEvent(l));
+            updateStudentList();
+            emptyForm();
+            winTabPane.getSelectionModel().select(0);
         } else {
             Label l = new Label("Error: Unable to add student!");
             bar.enqueue(new SnackbarEvent(l));
         }
     }
     
+    public void updateStudentList() {
+        root.getChildren().clear();
+        List<Student> students = studentDaoImpl.getAll();
+        students.forEach(s -> {
+            student.add(s);
+        });
+        root.getChildren().add(new RecursiveTreeItem<Student>(student, RecursiveTreeObject::getChildren));
+    }
+
+    public void emptyForm() {
+        idTextField.clear();
+        nameTextField.clear();
+        passwordTextField.clear();
+        departmentComboBox.getItems().clear();
+        fromDatePicker.getEditor().clear();
+        toDatePicker.getEditor().clear();
+    }
 }
