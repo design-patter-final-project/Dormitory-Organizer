@@ -94,7 +94,7 @@ public class StudentDaoImpl implements StudentDao {
             }
             return count;
         } catch (Exception ex) {
-            System.out.println(ex.getStackTrace());
+            System.out.println(ex);
             return -1;
         }
     }

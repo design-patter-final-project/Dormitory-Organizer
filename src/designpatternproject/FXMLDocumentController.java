@@ -14,9 +14,12 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import designpatternproject.database.StudentDaoImpl;
 import designpatternproject.database.model.Duration;
 import designpatternproject.database.model.Student;
+import designpatternproject.iterator.DurationRepository;
+import designpatternproject.iterator.Iiterator;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
@@ -27,6 +30,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -38,7 +42,9 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -85,11 +91,29 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private JFXButton addButton;
+    
+    @FXML
+    private Label idLabel;
+
+    @FXML
+    private Label nameLabel;
+
+    @FXML
+    private Label passwordLabel;
+
+    @FXML
+    private Label departmentLable;
+    
+    @FXML
+    private VBox dormStatusVBox;
                     
            
     ObservableList<Student> student = FXCollections.observableArrayList();
     StudentDaoImpl studentDaoImpl = StudentDaoImpl.getInstance();
     TreeItem<Student> root;
+    
+    // Student selected to edit
+    private Student selectedStudent;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -144,9 +168,13 @@ public class FXMLDocumentController implements Initializable {
         studentTableView.setShowRoot(false);
         studentTableView.setEditable(true);
         
+        //
+        // Student selected from student list
+        //
         studentTableView.getSelectionModel().selectedItemProperty()
-            .addListener((obs, oldSelection, newSelection) ->  {
-                System.out.println(newSelection.getValue().getName());
+            .addListener((obs, oldSelection, newSelection) ->  {    
+                selectedStudent = newSelection.getValue();
+                updateStudentView();
                 winTabPane.getSelectionModel().select(2); 
         });
         
@@ -209,4 +237,78 @@ public class FXMLDocumentController implements Initializable {
         fromDatePicker.getEditor().clear();
         toDatePicker.getEditor().clear();
     }
+    
+    private HBox createDormStatusHBox(Duration duration) {
+        
+        HBox hBox = new HBox();
+        Label yearLabel = new Label(Integer.toString(duration.getYear()));
+        yearLabel.setPadding(new Insets(10, 10, 10, 0));
+        Button button = null;
+        String statusDesc;
+        
+        switch(duration.getStatus()){
+            case 0:
+                statusDesc = "Not Assigned";
+                button = new Button("Activate");
+                
+                break;
+            case 1:
+                statusDesc = "Not Confirmed";
+                button = new Button("Deactivate");
+                break;
+            case 2:
+                statusDesc = "Confirmed";
+                break;
+            default:
+                statusDesc = "Status default";
+                break;      
+        }
+        
+        Label statusLabel = new Label(statusDesc);
+        statusLabel.setPadding(new Insets(10, 10, 10, 10));
+        hBox.getChildren().add(yearLabel);
+        hBox.getChildren().add(statusLabel);
+        
+        if(button != null) {
+            button.setPadding(new Insets(4, 5, 4, 5));
+            button.setStyle("-fx-background-color: #3ad; -fx-text-fill: #FFFFFF;");
+            
+            String buttonText = button.getText();
+            button.setOnAction((even) -> {
+                
+                if(buttonText.equals("Activate")){ // Activate year duration
+                    
+                    System.out.println("Activation");
+                    System.out.println(duration.getId());
+                } else { // Stop activation
+                
+                    System.out.println("stop activation");
+                    System.out.println(duration.getId());
+                }
+                
+            });
+            
+            hBox.getChildren().add(button);
+        }
+        return hBox;
+    }
+    
+    public void updateStudentView() {
+        idLabel.setText(selectedStudent.getId());
+        nameLabel.setText(selectedStudent.getName());
+        passwordLabel.setText(selectedStudent.getPassword());
+        departmentLable.setText(selectedStudent.getDepartment());
+        updateDurationView(selectedStudent.getDuration());
+    }
+    
+    public void updateDurationView(ObservableList<Duration> duration) {
+        DurationRepository dRepo = new DurationRepository(duration);
+        dormStatusVBox.getChildren().remove(1, dormStatusVBox.getChildren().size());
+        
+        for(Iiterator iterator = dRepo.getIterator(); iterator.hasNext();){
+            Duration iDuration = (Duration) iterator.next();
+            dormStatusVBox.getChildren().add(createDormStatusHBox(iDuration));
+        }
+    }
+    
 }
