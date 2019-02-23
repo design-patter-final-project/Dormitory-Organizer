@@ -24,10 +24,9 @@ public class Sorter extends Student{
 
 
     ArrayList<Student> students = new ArrayList<Student>();
-    public int dormAssiner(String name, String field){
+    public Student[][] dormAssiner(){
         int dormNumber = 0;
         int counter = 0;
-        int stable = 0;
 
         Student ar[][] = new Student[NUMBER_OF_AVAILABLE_DORMITORY][NUMBER_OF_STUDENTS_IN_A_DORM];
         int f = 0;
@@ -35,26 +34,32 @@ public class Sorter extends Student{
             for (int j = 0; j < NUMBER_OF_STUDENTS_IN_A_DORM; j ++){
                 if ((students.get(i).getField()).equals("Chemical")){
                     ar[i][j] = students.get(i);
+                    student.get(i).DormNumber = i;
                 }else if((students.get(i).getField()).equals("Software")) {
                     ar[i][j] = students.get(i);
+                    student.get(i).DormNumber = i;
                 }else if((students.get(i).getField()).equals("Civil")){
-                    stable = NUMBER_OF_AVAILABLE_DORMITORY - counter;
+                    ar[i][j] = students.get(i);
+                    student.get(i).DormNumber = i;
                 }else if((students.get(i).getField()).equals("Biomedical")){
                     ar[i][j] = students.get(i);
+                    student.get(i).DormNumber = i;
                 }else if((students.get(i).getField()).equals("Mechanical")){
                     ar[i][j] = students.get(i);
+                    student.get(i).DormNumber = i;
                 }else if((students.get(i).getField()).equals("IT")){
                     ar[i][j] = students.get(i);
+                    student.get(i).DormNumber = i;
+                }else {
+                    ar[i][j] = null;
                 }
             }
         }
+        return ar;
+    }
 
-        for(int i = 0; i < students.size(); ++i){
-                stable = NUMBER_OF_AVAILABLE_DORMITORY - counter;
-
-        }
-
-        return 0;
+    public int getDormNumber() {
+        return DormNumber;
     }
 
 }
