@@ -266,8 +266,16 @@ public class FXMLDocumentController implements Initializable {
         
         Label statusLabel = new Label(statusDesc);
         statusLabel.setPadding(new Insets(10, 10, 10, 10));
+        JFXTextField dormTextField = new JFXTextField();
+        dormTextField.setPromptText("Dorm Number");
+        dormTextField.setMaxWidth(102);
+        dormTextField.prefHeight(26.0);
+        dormTextField.prefWidth(101.0);  
+        dormTextField.setPadding(new Insets(5, 0, 0, 0));
+        HBox.setMargin(dormTextField, new Insets(0, 10, 0, 5));
         hBox.getChildren().add(yearLabel);
         hBox.getChildren().add(statusLabel);
+        hBox.getChildren().add(dormTextField);
         
         if(button != null) {
             button.setPadding(new Insets(4, 5, 4, 5));

@@ -48,7 +48,8 @@ public class DurationDaoImpl implements DurationDao {
             
             ResultSet rsDuration = st.executeQuery(query);
             while(rsDuration.next()){
-                Duration duration = new Duration(rsDuration.getInt("id"), rsDuration.getString("student_id"), rsDuration.getInt("year"), rsDuration.getInt("status"));
+                Duration duration = new Duration(rsDuration.getInt("id"), rsDuration.getString("student_id"), 
+                        rsDuration.getInt("year"), rsDuration.getInt("status"), rsDuration.getString("dorm"));
                 durations.add(duration);
             }
             return durations;
@@ -66,7 +67,7 @@ public class DurationDaoImpl implements DurationDao {
     @Override
     public int addDuration(Duration duration) {
         try {
-            String query = "INSERT INTO durations (student_id, year, status) VALUES (?,?,?)";
+            String query = "INSERT INTO durations (student_id, year, status, dorm) VALUES (?,?,?,?)";
             
             String url = "jdbc:mysql://localhost:3306/jdbctry";
             String username = "jdbc";
@@ -78,6 +79,7 @@ public class DurationDaoImpl implements DurationDao {
             st.setString(1, duration.getReferenceKey());
             st.setInt(2, duration.getYear());
             st.setInt(3, duration.getStatus());
+            st.setString(4, duration.getDorm());
             
             int count = st.executeUpdate();
             
@@ -89,4 +91,30 @@ public class DurationDaoImpl implements DurationDao {
         }
     }
     
+//    public int updateDuration(Duration duration) {
+//        try {
+//            String query = "UPDATE TABLE durations VALUES (?,?,?) WHERE id='?'";
+//            
+//            String url = "jdbc:mysql://localhost:3306/jdbctry";
+//            String username = "jdbc";
+//            String password = "jdbcpassword";
+//            
+//            Class.forName("com.mysql.cj.jdbc.Driver");
+//            Connection conn = DriverManager.getConnection(url, username, password);
+//            PreparedStatement st = conn.prepareStatement(query);
+//            st.setString(1, duration.getReferenceKey());
+//            
+//            int count = st.executeUpdate();
+//            
+//            if(count > 0){ // student added, add duration
+//                student.getDuration().forEach(duration -> {
+//                    durationDoaImpl.addDuration(duration);
+//                });
+//            }
+//            return count;
+//        } catch (Exception ex) {
+//            System.out.println(ex);
+//            return -1;
+//        }
+//    }
 }
