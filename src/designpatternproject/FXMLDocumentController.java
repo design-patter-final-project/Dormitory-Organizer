@@ -296,6 +296,8 @@ public class FXMLDocumentController implements Initializable {
             String buttonText = button.getText();
             button.setOnAction((even) -> {
                 
+                JFXSnackbar bar = new JFXSnackbar(winAnchorPane);
+                
                 if(buttonText.equals("Activate")){ // Activate year duration
                     
                     duration.setStatus(1);
@@ -303,18 +305,24 @@ public class FXMLDocumentController implements Initializable {
                    
                     if(durationDaoImpl.updateDuration(duration) > 0){ // updated sucessfully
                         updateStudentView();
+                        Label l = new Label("Dorm is assigned successfully!");
+                        bar.enqueue(new SnackbarEvent(l));
                     } else { // faild to update
-                        
+                        Label l = new Label("Error: assigning dorm!");
+                        bar.enqueue(new SnackbarEvent(l));
                     }
                     
                 } else { // Stop activation
-                
+                    
                     duration.setStatus(0);
                     duration.setDorm(null);
                     if(durationDaoImpl.updateDuration(duration) > 0){ // updated sucessfully
                         updateStudentView();
+                        Label l = new Label("Successfully remove activation!");
+                        bar.enqueue(new SnackbarEvent(l));
                     } else { // faild to update
-                        
+                        Label l = new Label("Error: removing activation!");
+                        bar.enqueue(new SnackbarEvent(l));
                     }
                 }
                 
