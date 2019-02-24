@@ -1,4 +1,4 @@
-package designpatternproject;
+package designpatternproject.adapters;
 
 import designpatternproject.database.model.Duration;
 import java.util.ArrayList;

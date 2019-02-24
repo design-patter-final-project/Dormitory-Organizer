@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="264.0" prefWidth="398.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="designpatternproject.LoginIntroViewController">
+   <children>
+      <JFXTextField fx:id="idTextField" layoutX="90.0" layoutY="95.0" prefHeight="26.0" prefWidth="219.0" promptText="Id" />
+      <Label layoutX="152.0" layoutY="35.0" text="Login">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </Label>
+      <JFXPasswordField fx:id="passwordTextField" layoutX="90.0" layoutY="139.0" prefHeight="26.0" prefWidth="219.0" promptText="Password" />
+      <JFXButton fx:id="loginButton" layoutX="90.0" layoutY="200.0" prefHeight="33.0" prefWidth="219.0" style="-fx-background-color: #3ad;" text="Login" textFill="WHITE" />
+   </children>
+</AnchorPane>

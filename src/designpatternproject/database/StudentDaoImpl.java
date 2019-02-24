@@ -109,4 +109,34 @@ public class StudentDaoImpl implements StudentDao {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    public Student GetUser(String id, String password) {
+        try {
+            String query = "SELECT * FROM students WHERE id='"+id+"' AND password='"+password+"'";
+            ObservableList<Student> students = FXCollections.observableArrayList();
+            ObservableList<Duration> durations = FXCollections.observableArrayList();
+            
+            String url = "jdbc:mysql://localhost:3306/jdbctry";
+            String dbUsername = "jdbc";
+            String dbPassword = "jdbcpassword";
+            
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(url, dbUsername, dbPassword);
+            Statement st = conn.createStatement();
+            
+            ResultSet rs = st.executeQuery(query);
+            rs.next();
+            Student student = new Student(rs.getString("id"), rs.getString("name"), rs.getString("password"), rs.getString("department"));
+
+            durations = durationDoaImpl.getDurationByReference(rs.getString("id"));
+
+            student.setDuration(durations);
+            
+            return student;
+        } catch (Exception ex) {
+            System.out.println(ex.getStackTrace());
+            return null;
+        }
+       
+    }
+    
 }

@@ -1,5 +1,6 @@
 package designpatternproject;
 
+import designpatternproject.adapters.DurationAdapter;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
@@ -49,7 +50,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
-public class FXMLDocumentController implements Initializable {
+public class AdminControlViewController implements Initializable {
     
     @FXML
     private AnchorPane winAnchorPane;

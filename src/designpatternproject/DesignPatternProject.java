@@ -10,12 +10,10 @@ public class DesignPatternProject extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("LoginIntroView.fxml"));
         
-        Scene scene = new Scene(root, 700, 500);
+        Scene scene = new Scene(root);
         
-        String css = DesignPatternProject.class.getResource("style.css").toExternalForm();
-        scene.getStylesheets().add(css);
         stage.setScene(scene);
         stage.show();
     }
