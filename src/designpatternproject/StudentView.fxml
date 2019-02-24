@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="484.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="designpatternproject.StudentViewController">
+   <children>
+      <JFXTabPane fx:id="winTabPane" prefHeight="485.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab text="Profile      ">
+               <content>
+                  <AnchorPane minHeight="-Infinity" minWidth="0.0" prefHeight="0.0" prefWidth="700.0">
+                     <children>
+                        <Label layoutX="46.0" layoutY="44.0" prefHeight="37.0" prefWidth="325.0" style="-fx-border-color: black; -fx-border-width: 0 0 2 0;" text="Profile">
+                           <font>
+                              <Font size="29.0" />
+                           </font>
+                        </Label>
+                        <HBox layoutX="59.0" layoutY="90.0" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label maxWidth="1.7976931348623157E308" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Id">
+                                       <padding>
+                                          <Insets bottom="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label maxWidth="1.7976931348623157E308" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Name">
+                                       <padding>
+                                          <Insets bottom="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label maxWidth="1.7976931348623157E308" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Department">
+                                       <padding>
+                                          <Insets bottom="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label fx:id="idLabel" maxWidth="1.7976931348623157E308" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="ATR/5735/08">
+                                       <padding>
+                                          <Insets bottom="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label fx:id="nameLabel" maxWidth="1.7976931348623157E308" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Nabil Seid">
+                                       <padding>
+                                          <Insets bottom="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </Label>
+                                    <Label fx:id="departmentLable" maxWidth="1.7976931348623157E308" style="-fx-border-color: black; -fx-border-width: 0 0 1 0;" text="Software">
+                                       <padding>
+                                          <Insets bottom="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </Label>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Register        ">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="430.0" prefWidth="700.0">
+                     <children>
+                        <Label layoutX="51.0" layoutY="34.0" prefHeight="47.0" prefWidth="451.0" style="-fx-border-width: 0 0 2 0; -fx-border-color: black;" text="Dorm Status">
+                           <font>
+                              <Font size="29.0" />
+                           </font>
+                           <padding>
+                              <Insets right="10.0" top="10.0" />
+                           </padding>
+                        </Label>
+                        <VBox fx:id="dormStatusVBox" layoutX="72.0" layoutY="97.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="235.0" prefWidth="410.0">
+                           <children>
+                              <HBox>
+                                 <children>
+                                    <Label text="Year">
+                                       <padding>
+                                          <Insets right="10.0" top="10.0" />
+                                       </padding>
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label prefHeight="26.0" prefWidth="130.0" text="Status">
+                                       <padding>
+                                          <Insets left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Label prefHeight="26.0" prefWidth="103.0" text="Dorm">
+                                       <padding>
+                                          <Insets left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+   </children>
+</AnchorPane>

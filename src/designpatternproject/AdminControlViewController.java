@@ -18,6 +18,8 @@ import designpatternproject.database.model.Duration;
 import designpatternproject.database.model.Student;
 import designpatternproject.iterator.DurationRepository;
 import designpatternproject.iterator.Iiterator;
+import designpatternproject.mediator.Component;
+import designpatternproject.mediator.Mediator;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -50,7 +52,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
-public class AdminControlViewController implements Initializable {
+public class AdminControlViewController implements Initializable, Component {
     
     @FXML
     private AnchorPane winAnchorPane;
@@ -109,6 +111,8 @@ public class AdminControlViewController implements Initializable {
     @FXML
     private VBox dormStatusVBox;
                     
+    // Mediator for comunication between Student and Login windows
+    private Mediator mediator;
            
     ObservableList<Student> student = FXCollections.observableArrayList();
     StudentDaoImpl studentDaoImpl = StudentDaoImpl.getInstance();
@@ -117,6 +121,17 @@ public class AdminControlViewController implements Initializable {
     
     // Student selected to edit
     private Student selectedStudent;
+    
+    @Override
+    public void setMediator(Mediator mediator) {
+        this.mediator = mediator;
+    }
+    
+    @Override
+    public String getName() {
+        return "AdminController";
+    }
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
