@@ -48,6 +48,7 @@ public class DurationDaoImpl implements DurationDao {
             
             ResultSet rsDuration = st.executeQuery(query);
             while(rsDuration.next()){
+                String s = rsDuration.getString("dorm");
                 Duration duration = new Duration(rsDuration.getInt("id"), rsDuration.getString("student_id"), 
                         rsDuration.getInt("year"), rsDuration.getInt("status"), rsDuration.getString("dorm"));
                 durations.add(duration);
@@ -91,30 +92,27 @@ public class DurationDaoImpl implements DurationDao {
         }
     }
     
-//    public int updateDuration(Duration duration) {
-//        try {
-//            String query = "UPDATE TABLE durations VALUES (?,?,?) WHERE id='?'";
-//            
-//            String url = "jdbc:mysql://localhost:3306/jdbctry";
-//            String username = "jdbc";
-//            String password = "jdbcpassword";
-//            
-//            Class.forName("com.mysql.cj.jdbc.Driver");
-//            Connection conn = DriverManager.getConnection(url, username, password);
-//            PreparedStatement st = conn.prepareStatement(query);
-//            st.setString(1, duration.getReferenceKey());
-//            
-//            int count = st.executeUpdate();
-//            
-//            if(count > 0){ // student added, add duration
-//                student.getDuration().forEach(duration -> {
-//                    durationDoaImpl.addDuration(duration);
-//                });
-//            }
-//            return count;
-//        } catch (Exception ex) {
-//            System.out.println(ex);
-//            return -1;
-//        }
-//    }
+    public int updateDuration(Duration duration) {
+        try {
+            String query = "UPDATE durations SET status=?, dorm=? WHERE id=?";
+            
+            String url = "jdbc:mysql://localhost:3306/jdbctry";
+            String username = "jdbc";
+            String password = "jdbcpassword";
+            
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(url, username, password);
+            PreparedStatement st = conn.prepareStatement(query);
+            st.setInt(1, duration.getStatus());
+            st.setString(2, duration.getDorm());
+            st.setInt(3, duration.getId());
+            
+            int count = st.executeUpdate();
+            
+            return count;
+        } catch (Exception ex) {
+            System.out.println(ex);
+            return -1;
+        }
+    }
 }

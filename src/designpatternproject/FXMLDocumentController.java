@@ -11,6 +11,7 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import designpatternproject.database.DurationDaoImpl;
 import designpatternproject.database.StudentDaoImpl;
 import designpatternproject.database.model.Duration;
 import designpatternproject.database.model.Student;
@@ -110,6 +111,7 @@ public class FXMLDocumentController implements Initializable {
            
     ObservableList<Student> student = FXCollections.observableArrayList();
     StudentDaoImpl studentDaoImpl = StudentDaoImpl.getInstance();
+    DurationDaoImpl durationDaoImpl = DurationDaoImpl.getInstance();
     TreeItem<Student> root;
     
     // Student selected to edit
@@ -242,7 +244,8 @@ public class FXMLDocumentController implements Initializable {
         
         HBox hBox = new HBox();
         Label yearLabel = new Label(Integer.toString(duration.getYear()));
-        yearLabel.setPadding(new Insets(10, 10, 10, 0));
+        yearLabel.setPrefWidth(54);
+        yearLabel.setPadding(new Insets(10, 0, 10, 0));
         Button button = null;
         String statusDesc;
         
@@ -250,7 +253,6 @@ public class FXMLDocumentController implements Initializable {
             case 0:
                 statusDesc = "Not Assigned";
                 button = new Button("Activate");
-                
                 break;
             case 1:
                 statusDesc = "Not Confirmed";
@@ -265,17 +267,27 @@ public class FXMLDocumentController implements Initializable {
         }
         
         Label statusLabel = new Label(statusDesc);
-        statusLabel.setPadding(new Insets(10, 10, 10, 10));
-        JFXTextField dormTextField = new JFXTextField();
-        dormTextField.setPromptText("Dorm Number");
-        dormTextField.setMaxWidth(102);
-        dormTextField.prefHeight(26.0);
-        dormTextField.prefWidth(101.0);  
-        dormTextField.setPadding(new Insets(5, 0, 0, 0));
-        HBox.setMargin(dormTextField, new Insets(0, 10, 0, 5));
+        statusLabel.setPadding(new Insets(10, 0, 10, 0));
+        statusLabel.setPrefWidth(130);
+        
         hBox.getChildren().add(yearLabel);
         hBox.getChildren().add(statusLabel);
-        hBox.getChildren().add(dormTextField);
+        
+        JFXTextField dormTextField = new JFXTextField();
+        dormTextField.setPromptText("Dorm Number");
+        dormTextField.setPrefHeight(26.0);
+        dormTextField.setPrefWidth(100);  
+        dormTextField.setPadding(new Insets(5, 0, 0, 0));
+        HBox.setMargin(dormTextField, new Insets(0, 30, 0, 0));
+        
+        if(duration.getStatus() == 0) {
+            hBox.getChildren().add(dormTextField);
+        } else {
+            Label dormLabel = new Label(duration.getDorm());
+            dormLabel.setPadding(new Insets(10, 0, 10, 0));
+            dormLabel.setPrefWidth(130);
+            hBox.getChildren().add(dormLabel);
+        }
         
         if(button != null) {
             button.setPadding(new Insets(4, 5, 4, 5));
@@ -286,12 +298,24 @@ public class FXMLDocumentController implements Initializable {
                 
                 if(buttonText.equals("Activate")){ // Activate year duration
                     
-                    System.out.println("Activation");
-                    System.out.println(duration.getId());
+                    duration.setStatus(1);
+                    duration.setDorm(dormTextField.getText());
+                   
+                    if(durationDaoImpl.updateDuration(duration) > 0){ // updated sucessfully
+                        updateStudentView();
+                    } else { // faild to update
+                        
+                    }
+                    
                 } else { // Stop activation
                 
-                    System.out.println("stop activation");
-                    System.out.println(duration.getId());
+                    duration.setStatus(0);
+                    duration.setDorm(null);
+                    if(durationDaoImpl.updateDuration(duration) > 0){ // updated sucessfully
+                        updateStudentView();
+                    } else { // faild to update
+                        
+                    }
                 }
                 
             });

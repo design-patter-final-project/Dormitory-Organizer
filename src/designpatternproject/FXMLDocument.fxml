@@ -190,7 +190,15 @@
                                                 <Font name="System Bold" size="13.0" />
                                              </font>
                                           </Label>
-                                          <Label text="Status">
+                                          <Label prefHeight="26.0" prefWidth="130.0" text="Status">
+                                             <padding>
+                                                <Insets left="10.0" right="10.0" top="10.0" />
+                                             </padding>
+                                             <font>
+                                                <Font name="System Bold" size="13.0" />
+                                             </font>
+                                          </Label>
+                                          <Label prefHeight="26.0" prefWidth="103.0" text="Dorm">
                                              <padding>
                                                 <Insets left="10.0" right="10.0" top="10.0" />
                                              </padding>
