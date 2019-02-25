@@ -1,6 +1,7 @@
 package designpatternproject;
 
 import designpatternproject.mediator.Authenticator;
+import java.nio.file.Paths;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,7 +13,7 @@ public class DesignPatternProject extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginIntroView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/LoginIntroView.fxml"));
         Parent root = loader.load();       
         LoginIntroViewController loginController = loader.getController();
         Authenticator.getInstance().registerScene(loginController);

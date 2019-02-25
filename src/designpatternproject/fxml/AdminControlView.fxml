@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="winAnchorPane" prefHeight="485.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="designpatternproject.FXMLDocumentController">
+<AnchorPane fx:id="winAnchorPane" prefHeight="485.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="designpatternproject.AdminControlViewController">
    <children>
       <JFXTabPane fx:id="winTabPane" prefHeight="485.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE">
          <tabs>

@@ -5,6 +5,10 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import designpatternproject.database.StudentDaoImpl;
 import designpatternproject.database.model.Student;
+import designpatternproject.factory.AdminWinGenerator;
+import designpatternproject.factory.StudentWinGenerator;
+import designpatternproject.factory.WinFactory;
+import designpatternproject.factory.WinTypes;
 import designpatternproject.mediator.Component;
 import designpatternproject.mediator.Authenticator;
 import designpatternproject.mediator.Mediator;
@@ -57,51 +61,52 @@ public class LoginIntroViewController implements Initializable, Component {
             String password = passwordTextField.getText().toString().trim();
             
             if(id.equals("Admin") &&  password.equals("adminpassword")) { // user is admin
-                try {
                     
                     Stage loginStage = (Stage) ((Node)e.getSource()).getScene().getWindow();
                     loginStage.close();
                     
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminControlView.fxml"));
-                    Parent root = loader.load();       
-                    AdminControlViewController adminController = (AdminControlViewController) loader.getController();
-                    auth.registerScene(adminController);
+//                    FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminControlView.fxml"));
+//                    Parent root = loader.load();       
+//                    AdminControlViewController adminController = (AdminControlViewController) loader.getController();
+//                    auth.registerScene(adminController);
+//                    
+//                    Scene scene = new Scene(root);
+//                    
+//                    Stage stage = new Stage();
+//                    stage.setTitle("Login");
+//                    stage.setScene(scene);
+//                    stage.show();
                     
-                    Scene scene = new Scene(root);
-                    
-                    Stage stage = new Stage();
-                    stage.setTitle("Login");
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (IOException ex) {
-                    Logger.getLogger(LoginIntroViewController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                    AdminWinGenerator adminWinGenerator = (AdminWinGenerator) WinFactory.getWin(WinTypes.WinType.AdminWin);
+                    adminWinGenerator.generate();
+              
             }
             
             Student student = studentDaoImpl.GetUser(id, password);
             
             if(student != null) { // matching student has found for id & username
-                try {
+            
                     System.out.println(student.getId());
                     auth.logInStudent(student);
                     Stage loginStage = (Stage) ((Node)e.getSource()).getScene().getWindow();
                     loginStage.close();
 
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("StudentView.fxml"));
-                    Parent root = loader.load();       
-                    StudentViewController studentController = (StudentViewController) loader.getController();
-                    auth.registerScene(studentController);
+//                    FXMLLoader loader = new FXMLLoader(getClass().getResource("StudentView.fxml"));
+//                    Parent root = loader.load();       
+//                    StudentViewController studentController = (StudentViewController) loader.getController();
+//                    auth.registerScene(studentController);
+//                    
+//                    Scene scene = new Scene(root);
+//                    
+//                    Stage stage = new Stage();
+//                    stage.setTitle("Student");
+//                    stage.setScene(scene);
+//                    stage.show();
+//                    
+                    StudentWinGenerator studentWinGenerator = (StudentWinGenerator) WinFactory.getWin(WinTypes.WinType.StudentWin);
+                    studentWinGenerator.generate();
                     
-                    Scene scene = new Scene(root);
-                    
-                    Stage stage = new Stage();
-                    stage.setTitle("Student");
-                    stage.setScene(scene);
-                    stage.show();
-                    
-                } catch (IOException ex) {
-                    Logger.getLogger(LoginIntroViewController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+             
             }
         });
     }    
